@@ -13,18 +13,18 @@ public class GameEngine {
 	}
 	
 	public void initialize() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Start playing ? ");
-		String choice = sc.nextLine();
-		
-		if (choice.equals("yes")) {	
+//		Scanner sc = new Scanner(System.in);
+//		System.out.println("Start playing ? ");
+//		String choice = sc.nextLine();
+//		
+//		if (choice.equals("yes")) {	
 			this.playing = true;
 			this.gameLoop();
-		} else {
-			System.out.println("The game is stopped before starting !");
-		}
+//		} else {
+//			System.out.println("The game is stopped before starting !");
+//		}
 		
-		sc.close();
+//		sc.close();
 	}
 	
 	public void gameLoop() {
@@ -42,6 +42,12 @@ public class GameEngine {
 			if(!parser.getError().isEmpty()) {
 				System.out.println(parser.getError());
 			}
+			
+			for(Tree t:parser.getParseTree()) {
+				System.out.println(t.action + "- pos(" + t.position + ") : (left arg : " + t.left + " | right arg : " + t.right + ")");
+			}
+			
+			parser.drawAST();
 		}
 		
 		sc.close();

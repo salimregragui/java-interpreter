@@ -41,6 +41,17 @@ class Lexer {
 		}
 	};
 	
+	static List<String> authorizedFollowWords = new ArrayList<String>() {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		
+		{			
+			add("then");
+		}
+	};
+	
 	static List<Token> lexSentence(String sentence) {
 		List<Token> listOfTokens = new ArrayList<Token>();
 		
@@ -53,7 +64,9 @@ class Lexer {
 				listOfTokens.add(new Token(TokenType.VERB, word));
 			} else if(authorizedLocators.contains(word)) {
 				listOfTokens.add(new Token(TokenType.LOCATOR, word));
-			} else {
+			} else if (authorizedFollowWords.contains(word)) {
+				listOfTokens.add(new Token(TokenType.FOLLOW, word));
+			}else {
 				listOfTokens.add(new Token(TokenType.SYMBOL, word));
 			}
 		}
